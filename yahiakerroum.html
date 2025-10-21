@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-        <style>
+    <title>Portfolio</title>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -124,6 +124,24 @@
             height: 20px;
         }
 
+        /* Added profile picture styling */
+        .profile-pic {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 40px;
+            border: 3px solid rgba(96, 165, 250, 0.4);
+            box-shadow: 0 0 30px rgba(96, 165, 250, 0.2), inset 0 0 20px rgba(96, 165, 250, 0.1);
+            object-fit: cover;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .profile-pic:hover {
+            box-shadow: 0 0 40px rgba(96, 165, 250, 0.4), inset 0 0 20px rgba(96, 165, 250, 0.15);
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 40px 24px;
@@ -138,15 +156,25 @@
                 font-size: 15px;
                 margin-bottom: 32px;
             }
+
+            /* Responsive profile picture */
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 30px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="/assets/yahia.jpg" alt="Profile Picture" class="profile-pic">
+        
         <h1 class="name">Yahia Kerroum</h1>
         
         <p class="bio">
-            Passionate Ai developer with a keen interest in building scalable applications and solving complex problems. I love creating elegant solutions that combine clean code with exceptional user experiences. Always eager to learn new technologies and collaborate with talented teams.
+ENSIA engineering student crafting digital solutions through code. I transform complex problems into elegant software, with expertise spanning from backend systems to interactive interfaces. Exploring where algorithms meet real-world impact, one project at a time.
+
         </p>
 
         <div class="section-title">Technical Skills</div>
