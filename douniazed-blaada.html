@@ -111,13 +111,31 @@
   font-size: 14px;
   margin-bottom: 8px;
 }
+.timeline-heading {
+  /* header should span full width and avoid the left padding used by items */
+  padding-left: 0;
+  margin-bottom: 24px;
+}
+.timeline-title {
+  margin: 0 0 6px 0;
+  font-size: 1.125rem;
+  color: #111;
+  font-weight: 600;
+}
 
-  @media (max-width:900px){
-    .timeline:before{left:16px}
-    .timeline li{width:100%;left:0;padding-left:60px;text-align:left;margin-bottom:28px}
-    .timeline-badge{left:16px;transform:none;top:10px}
-  }
+.timeline-heading h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #222;         /* ensure contrast with background */
+  font-weight: 700;
+}
 
+@media (max-width:900px){
+  .timeline:before{ left:16px; }
+  .timeline li{ width:100%; left:0; padding-left:60px; text-align:left; margin-bottom:28px; }
+  .timeline-badge{ left:16px; transform:none; top:10px; }
+  .timeline-heading { padding-left: 0; }
+}
 /* ===== skills (fixed label + progress styles) ===== */
 .charts{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:22px}
 .chart{width:120px;height:120px;border-radius:50%;display:grid;place-items:center;background:#f0f6fb;position:relative}
@@ -179,10 +197,10 @@
 <div id="loader" class="fh5co-loader">Loading…</div>
 
 <!-- page -->
-<header id="fh5co-header" style="background-image:url('assets/images/hero.jpg');" >
+<header id="fh5co-header" style="background-image:url('assets/background.jpg');" >
   <div class="display-t container">
     <div class="display-tc fade-in" id="hero-box">
-      <div class="profile-thumb" style="background-image:url('assets/images/mypic.jpg');"></div>
+      <div class="profile-thumb" style="background-image:url('assets/dounia.jpg');"></div>
       <h1 id="hero-name">Douniazed Blaada</h1>
       <h3 id="hero-title">3rd Year Artificial Intelligence Student</h3>
       <div class="socials" role="list">
@@ -250,7 +268,6 @@
           <div class="timeline-body"><p>Relevant coursework: Machine Learning, Deep Learning, Data Structures, NLP, Computer Vision.</p></div>
         </div>
       </li>
-      <li class="timeline-heading"><div><h3>Education</h3></div></li>
 
       <li class="timeline-inverted">
         <div class="timeline-badge">🎓</div>
