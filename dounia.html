@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Douniazed Blaada — AI Student Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=Kaushan+Script&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== base reset ===== */
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Space Mono", monospace;
+    color:#333;background:#fff;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    line-height:1.6;
+  }
+  a{color:#56bff3;text-decoration:none}
+  .container{max-width:1100px;margin:0 auto;padding:24px}
+
+  /* ===== loader (hidden after ready) ===== */
+  .fh5co-loader{
+    position:fixed;inset:0;display:grid;place-items:center;background:#fff;z-index:9999;
+    font-size:16px;color:#666;
+  }
+  .hidden{display:none !important}
+
+  /* ===== HEADER / HERO ===== */
+  header#fh5co-header{
+    min-height:420px;display:flex;align-items:center;justify-content:center;
+    background-size:cover;background-position:center;position:relative;
+  }
+  /* fallback background color if image missing */
+  header#fh5co-header::before{
+    content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,32,0.45), rgba(6,16,32,0.45));
+  }
+  .display-t{position:relative;z-index:2;text-align:center;padding:36px 16px}
+  .profile-thumb{
+    width:150px;height:150px;border-radius:50%;background-size:cover;background-position:center;
+    margin:0 auto 18px;border:5px solid white;box-shadow:0 8px 20px rgba(0,0,0,0.2)
+  }
+  h1{font-family:"Kaushan Script", cursive;color:#fff;font-size:40px;margin-bottom:6px}
+  h3{color:#fff;font-weight:600;margin-bottom:14px}
+  .socials{display:inline-flex;gap:10px;margin-top:6px}
+  .socials a{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;
+    background:rgba(255,255,255,0.12);color:#fff;font-weight:700;transition:transform .18s}
+  .socials a:hover{transform:translateY(-4px);background:#2b8ccf}
+
+  /* ===== sections ===== */
+  section{padding:56px 0}
+  .section-heading{text-align:center;margin-bottom:28px}
+  .section-heading h2{font-size:28px;color:#111}
+
+  /* ===== about ===== */
+  .about-grid{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap}
+  .info{list-style:none;padding:0;width:100%}
+  .info li{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed #eee}
+  .first-block{width:140px;font-weight:700;color:#111}
+  .second-block{color:#666;word-break:break-word;flex:1}
+
+ /* ===== timeline (stacked version) ===== */
+.timeline {
+  position: relative;
+  list-style: none;
+  padding: 20px 0;
+}
+
+.timeline:before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #e6e6e6;
+}
+
+.timeline li {
+  position: relative;
+  width: 100%;
+  padding-left: 60px;
+  margin-bottom: 40px;
+}
+
+.timeline-badge {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #56bff3;
+  color: #fff;
+  font-weight: 700;
+  z-index: 2;
+}
+
+.timeline-panel {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(15, 30, 50, 0.06);
+}
+
+.timeline .company {
+  color: #999;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+  @media (max-width:900px){
+    .timeline:before{left:16px}
+    .timeline li{width:100%;left:0;padding-left:60px;text-align:left;margin-bottom:28px}
+    .timeline-badge{left:16px;transform:none;top:10px}
+  }
+
+/* ===== skills (fixed label + progress styles) ===== */
+.charts{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:22px}
+.chart{width:120px;height:120px;border-radius:50%;display:grid;place-items:center;background:#f0f6fb;position:relative}
+.chart span{font-size:14px; text-align:center; padding:4px}
+.progress-wrap{margin-bottom:18px}
+.progress-wrap h3{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  font-size:16px;
+  color:#111;
+  margin:0 0 8px 0;
+  line-height:1.1;
+  font-weight:700;
+}
+.name-left{display:inline-block;flex:1;text-align:left}
+.value-right{display:inline-block;white-space:nowrap;margin-left:12px;color:#666;font-weight:700;font-size:14px}
+
+/* progress bar container */
+.progress{
+  height:12px;
+  background:#e9eef6;
+  border-radius:999px;
+  overflow:hidden;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,0.03);
+}
+
+/* animated bar */
+.progress-bar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#4da6e8,#2b8ccf);
+  transition:width 1s ease;
+  min-width:0;
+}
+
+/* responsive tweaks */
+@media(max-width:520px){
+  .chart{width:100px;height:100px}
+  .progress-wrap h3{font-size:15px}
+  .value-right{font-size:13px}
+}
+
+
+  /* ===== CTA & footer ===== */
+  .cta{background:#2b8ccf;color:#fff;padding:48px 0;text-align:center}
+  .btn{display:inline-block;padding:12px 20px;border-radius:10px;background:#fff;color:#1a2430;font-weight:700}
+  footer{padding:18px 0;text-align:center;color:#666}
+
+  /* small helpers */
+  .fade-in{opacity:0;transform:translateY(10px);transition:opacity .6s,transform .6s}
+  .visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- loader -->
+<div id="loader" class="fh5co-loader">Loading…</div>
+
+<!-- page -->
+<header id="fh5co-header" style="background-image:url('assets/images/hero.jpg');" >
+  <div class="display-t container">
+    <div class="display-tc fade-in" id="hero-box">
+      <div class="profile-thumb" style="background-image:url('assets/images/mypic.jpg');"></div>
+      <h1 id="hero-name">Douniazed Blaada</h1>
+      <h3 id="hero-title">3rd Year Artificial Intelligence Student</h3>
+      <div class="socials" role="list">
+        <a href="#" aria-label="facebook">f</a>
+        <a href="#" aria-label="linkedin">in</a>
+        <a href="#" aria-label="github">GH</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section id="fh5co-about" class="fade-in">
+    <div class="section-heading"><h2>About Me</h2></div>
+    <div class="about-grid">
+      <div style="flex:0 1 300px">
+        <ul class="info" aria-label="personal info">
+          <li><span class="first-block">Full Name:</span><span class="second-block" id="info-name">Blaada Douniazed</span></li>
+          <li><span class="first-block">Phone:</span><span class="second-block" id="info-phone">+213540314144</span></li>
+          <li><span class="first-block">Email:</span><span class="second-block" id="info-email">douniazed.blaada@ensia.edu.dz</span></li>
+          <li><span class="first-block">Website / GitHub:</span><span class="second-block" id="info-website">github.com/dounia439</span></li>
+          <li><span class="first-block">Location:</span><span class="second-block" id="info-location">Algiers, Algeria</span></li>
+        </ul>
+      </div>
+
+      <div style="flex:1 1 520px">
+        <h2>Hello There!</h2>
+        <p id="about-para-1">Hello! I’m Blaada Douniazed, a 3rd-year Artificial Intelligence student at ENSIA with a growing passion for technology and problem-solving. My journey in computer science started early, and over the years I’ve developed a strong foundation in programming, algorithms, and software development.</p>
+        <p id="about-para-2">I enjoy exploring how AI and technology can be used to improve real-world systems and experiences. Throughout my studies, I’ve worked on various academic and personal projects, from building interactive websites to developing intelligent solutions using AI concepts. Currently, I’m focusing on mobile development, data mining, and software engineering while continuing to explore new areas within artificial intelligence.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="fh5co-resume" class="fade-in">
+    <div class="section-heading"><h2>My Resume</h2></div>
+
+    <ul class="timeline" aria-label="experience timeline">
+      <li class="timeline-heading"><div><h3>Experience</h3></div></li>
+
+      <li>
+        <div class="timeline-badge">💼</div>
+        <div class="timeline-panel">
+          <h3 class="timeline-title">Water Quality Prediction Website</h3>
+          <span class="company">Independent Project — 2023</span>
+          <div class="timeline-body"><p>Developed a website integrating a machine learning model to predict water quality (COD, BOD, TKN) and learned deployment and web-AI integration.</p></div>
+        </div>
+      </li>
+
+      <li class="timeline-inverted">
+        <div class="timeline-badge">💼</div>
+        <div class="timeline-panel">
+          <h3 class="timeline-title">University Projects</h3>
+          <span class="company">ENSIA — 2024</span>
+          <div class="timeline-body"><p>Worked on academic projects applying AI and web development.</p></div>
+        </div>
+      </li>
+
+      <li class="timeline-heading"><div><h3>Education</h3></div></li>
+
+      <li class="timeline-inverted">
+        <div class="timeline-badge">🎓</div>
+        <div class="timeline-panel">
+          <h3 class="timeline-title">Bachelor's in Artificial Intelligence (3rd Year)</h3>
+          <span class="company">ENSIA — 2022 - Present</span>
+          <div class="timeline-body"><p>Relevant coursework: Machine Learning, Deep Learning, Data Structures, NLP, Computer Vision.</p></div>
+        </div>
+      </li>
+      <li class="timeline-heading"><div><h3>Education</h3></div></li>
+
+      <li class="timeline-inverted">
+        <div class="timeline-badge">🎓</div>
+        <div class="timeline-panel">
+          <h3 class="timeline-title">Baccalaureate Diploma – Mention Très Bien</h3>
+          <span class="company">2023</span>
+          <div class="timeline-body"><p>Successfully earned the Baccalaureate Diploma with Mention Très Bien (Excellent).</p></div>
+        </div>
+      </li>
+
+      <li class="timeline-inverted">
+        <div class="timeline-badge">🎓</div>
+        <div class="timeline-panel">
+          <h3 class="timeline-title">Baccalaureate Diploma – Mention Bien</h3>
+          <span class="company">2020</span>
+          <div class="timeline-body"><p>Achieved the Baccalaureate Diploma with Mention Bien (Good).</p></div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="fh5co-skills" class="fade-in">
+    <div class="section-heading"><h2>Skills</h2></div>
+
+    <div class="charts" aria-hidden="false">
+      <div class="chart" data-percent="80"><span><strong>Python</strong>80%</span></div>
+      <div class="chart" data-percent="70"><span><strong>Dart</strong>70%</span></div>
+      <div class="chart" data-percent="90"><span><strong>C++</strong>90%</span></div>
+      <div class="chart" data-percent="70"><span><strong>JavaScript</strong>70%</span></div>
+    </div>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+      <div style="flex:1 1 320px">
+        <div class="progress-wrap">
+          <h3><span class="name-left">Data Structures</span><span class="value-right">90%</span></h3>
+          <div class="progress"><div class="progress-bar" data-width="90"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <h3><span class="name-left">SQL & Databases</span><span class="value-right">85%</span></h3>
+          <div class="progress"><div class="progress-bar" data-width="85"></div></div>
+        </div>
+      </div>
+
+      <div style="flex:1 1 320px">
+        <div class="progress-wrap">
+          <h3><span class="name-left">Web development</span><span class="value-right">80%</span></h3>
+          <div class="progress"><div class="progress-bar" data-width="80"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <h3><span class="name-left">Mobile Development</span><span class="value-right">78%</span></h3>
+          <div class="progress"><div class="progress-bar" data-width="78"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<section class="cta">
+  <div class="container">
+    <h2>Let's collaborate</h2>
+    <p>If you'd like to work together on an AI project, internship or research, get in touch.</p>
+    <a class="btn" href="#fh5co-about">Contact Me</a>
+  </div>
+</section>
+
+<footer><div class="container"><p>&copy; 2025 Blaada Douniazed — All Rights Reserved</p></div></footer>
+
+<!-- simple JS: hides loader + animates charts/progress -->
+<script>
+  (function(){
+    // hide loader once DOM is ready
+    window.addEventListener('load', function(){
+      document.getElementById('loader').classList.add('hidden');
+      // reveal animated elements
+      document.querySelectorAll('.fade-in').forEach(function(el){ el.classList.add('visible'); });
+    });
+
+    // draw circular charts (simple conic simulation using background)
+    document.querySelectorAll('.chart').forEach(function(c){
+      var pct = Number(c.dataset.percent) || 0;
+      if(pct < 0) pct = 0; if(pct > 100) pct = 100;
+      c.style.background = 'conic-gradient(#56bff3 ' + pct + '%, #e9eef6 ' + pct + '%)';
+    });
+
+    // animate progress bars
+    document.querySelectorAll('.progress-bar').forEach(function(pb){
+      var w = Number(pb.dataset.width) || 0;
+      setTimeout(function(){ pb.style.width = w + '%'; }, 200);
+    });
+
+    // smooth anchor scroll
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var target = document.querySelector(this.getAttribute('href'));
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
